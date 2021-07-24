@@ -1,0 +1,70 @@
+{
+    "security.workspace.trust.untrustedFiles": "open",
+    "vim.useSystemClipboard": true,
+    "vim.searchHighlightColor": "rgba(182, 196, 120, 0.5)",
+    "vim.hlsearch": true,
+    "vim.highlightedyank.enable": true,
+    "vim.highlightedyank.color": "rgba(182, 196, 120, 0.5)",
+    "vim.highlightedyank.duration": 100,
+    "vim.incsearch": true,
+    "vim.insertModeKeyBindings": [
+        {
+            "before": [
+                "k",
+                "j"
+            ],
+            "after": [
+                "<Esc>"
+            ]
+        }
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "<leader>",
+                "h",
+                "l"
+            ],
+            "commands": [
+                ":nohl"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "w"
+            ],
+            "commands": [
+                "workbench.action.files.save"
+            ]
+        },
+        {
+            "before": [
+                "<leader>", "e", "m"
+            ],
+            "after": [
+                "<leader>",
+                "<leader>",
+                "<leader>",
+                "b",
+                "d",
+                "w"
+            ]
+        },
+        // - editor.action.formatSelection.multiple
+        // - workbench.action.terminal.switchTermina
+    ],
+    "vim.leader": " ",
+    "vim.easymotion": true,
+    "vim.easymotionMarkerBackgroundColor": "gray",
+    "editor.lineNumbers": "relative",
+    "editor.suggestSelection": "first",
+    "workbench.sideBar.location": "right",
+    "search.exclude": {
+        "**/bin": true,
+        "**/node_ modules": true,
+        "**/package-lock.json": true
+    },
+    "workbench.colorTheme": "Atom One Dark",
+    "window.zoomLevel": 2
+}
