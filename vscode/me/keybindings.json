@@ -1,0 +1,82 @@
+// Place your key bindings in this file to override the defaultsauto[]
+[
+    {
+        "key": "alt+h alt+h",
+        "command": "workbench.action.navigateBack"
+    },
+    {
+        "key": "alt+l alt+l",
+        "command": "workbench.action.navigateForward"
+    },
+    {
+        "key": "ctrl+alt+`",
+        "command": "workbench.action.toggleMaximizedPanel"
+    },
+    // VSCode IntelliSense with Vim Key Strokes
+    {
+        "key": "ctrl+j",
+        "command": "selectNextSuggestion",
+        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
+    },
+    {
+        "key": "ctrl+k",
+        "command": "selectPrevSuggestion",
+        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
+    },
+    // VSCode Quick Open with Vim Key Strokes, super strong!!!
+    {
+        "key": "ctrl+j",
+        "command": "workbench.action.quickOpenSelectNext",
+        "when": "inQuickOpen"
+    },
+    {
+        "key": "ctrl+k",
+        "command": "workbench.action.quickOpenSelectPrevious",
+        "when": "inQuickOpen"
+    },
+
+    // select text vim INSERT mode
+    // {
+    //     "key": "ctrl+k",
+    //     "command": "cursorUp",
+    //     "when": "textInputFocus && !(suggestWidgetMultipleSuggestions && suggestWidgetVisible)"
+    // },
+    // {
+    //     "key": "ctrl+j",
+    //     "command": "cursorDown",
+    //     "when": "textInputFocus && !(suggestWidgetMultipleSuggestions && suggestWidgetVisible)"
+    // }
+    // ,
+    // {
+    //     "key": "ctrl+l",
+    //     "command": "cursorRight",
+    //     "when": "textInputFocus"
+    // },
+    // {
+    //     "key": "ctrl+h",
+    //     "command": "cursorLeft",
+    //     "when": "textInputFocus"
+    // },
+    
+    // {
+    //     "key": "ctrl+shift+k",
+    //     "command": "cursorUpSelect",
+    //     "when": "textInputFocus"
+    // },
+    // {
+    //     "key": "ctrl+shift+j",
+    //     "command": "cursorDownSelect",
+    //     "when": "textInputFocus"
+    // }
+    // ,
+    // {
+    //     "key": "ctrl+shift+l",
+    //     "command": "cursorWordRightSelect",
+    //     "when": "textInputFocus"
+    // },
+    // {
+    //     "key": "ctrl+shift+h",
+    //     "command": "cursorWordLeftSelect",
+    //     "when": "textInputFocus"
+    // }
+]
