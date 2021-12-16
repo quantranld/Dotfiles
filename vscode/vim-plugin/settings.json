@@ -1,0 +1,152 @@
+{
+  "security.workspace.trust.untrustedFiles": "open",
+  "vim.useSystemClipboard": true,
+  "vim.searchHighlightColor": "rgba(182, 196, 120, 0.5)",
+  "vim.hlsearch": true,
+  "vim.highlightedyank.enable": true,
+  "vim.highlightedyank.color": "rgba(182, 196, 120, 0.5)",
+  "vim.highlightedyank.duration": 100,
+  "vim.incsearch": true,
+  "vim.useCtrlKeys": true,
+  "vim.insertModeKeyBindings": [
+    {
+      "before": ["k", "j"],
+      "after": ["<Esc>"]
+    },
+    {
+      "before": ["K", "J"],
+      "after": ["<Esc>"]
+    }
+  ],
+  "vim.handleKeys": {
+    // enable vs code search fn
+    "<C-f>": false,
+    // normal select all to work, but just replace this overtime
+    "<C-a>": false,
+    // normal copy, but just replace this overtime
+    "<C-c>": false,
+    // toggle sidebar
+    "<C-b>": false,
+    // remap as up arrow
+    // "<C-k>": false
+    "<C-g>": false
+  },
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["<leader>", "h", "l"],
+      "commands": [":nohl"]
+    },
+    {
+      "before": ["<leader>", "s"],
+      "commands": ["workbench.action.files.save"]
+    },
+    {
+      "before": ["<leader>", "w"],
+      "commands": ["workbench.action.closeActiveEditor"]
+    },
+    {
+      "before": ["<leader>", "e", "m"],
+      "after": ["<leader>", "<leader>", "<leader>", "b", "d", "w"]
+    },
+    {
+      "before": ["<leader>", "f", "a"],
+      "commands": ["editor.foldAll"]
+    },
+    {
+      "before": ["<leader>", "f", "2"],
+      "commands": [
+        // fold at function level, trigger file top file level
+        "editor.foldLevel3"
+      ]
+    },
+    {
+      "before": ["<leader>", "f", "3"],
+      "commands": [
+        // fold at function level, trigger file top file level
+        "editor.foldLevel3"
+      ]
+    },
+    {
+      "before": ["<leader>", "f", "4"],
+      "commands": [
+        // fold at function level, trigger file top file level
+        "editor.foldLevel3"
+      ]
+    },
+    {
+      "before": ["<leader>", "f", "5"],
+      "commands": [
+        // fold at function level, trigger file top file level
+        "editor.foldLevel3"
+      ]
+    },
+    {
+      "before": ["<leader>", "u", "f", "a"],
+      "commands": ["editor.unfoldAll"]
+    },
+    {
+      "before": ["<leader>", "p", "b"], // custom yank to register a&b; and paste from a&b
+      "after": ["\"", "b", "p"]
+    },
+    {
+      "before": ["<leader>", "p", "a"],
+      "after": ["\"", "a", "p"]
+    },
+    { "before": ["H"], "after": ["^"] },
+    { "before": ["L"], "after": ["$"] },
+    { "before": ["d", "L"], "after": ["d", "$"] },
+    { "before": ["d", "H"], "after": ["d", "^"] },
+    { "before": ["c", "L"], "after": ["c", "$"] },
+    { "before": ["c", "H"], "after": ["c", "^"] },
+    // - editor.action.formatSelection.multiple
+    // - workbench.action.terminal.switchTermina
+  ],
+  // For visual mode
+  "vim.visualModeKeyBindings": [
+    {
+      "before": ["<leader>", "y", "a"], // custom yank to register a&b; and paste from a&b
+      "after": ["\"", "a", "y"]
+    },
+    {
+      "before": ["<leader>", "y", "b"],
+      "after": ["\"", "b", "y"]
+    },
+    {
+      "before": ["<leader>", "p", "b"], // custom yank to register a&b; and paste from a&b
+      "after": ["\"", "b", "p"]
+    },
+    {
+      "before": ["<leader>", "p", "a"],
+      "after": ["\"", "a", "p"]
+    },
+    { "before": ["H"], "after": ["^"] },
+    { "before": ["L"], "after": ["$"] },
+  ],
+  "vim.leader": "<space>",
+  "vim.easymotion": true,
+  "vim.easymotionMarkerBackgroundColor": "gray",
+  "editor.lineNumbers": "relative",
+  "editor.suggestSelection": "first",
+  "workbench.sideBar.location": "right",
+  "search.exclude": {
+    "**/bin": true,
+    "**/node_ modules": true,
+    "**/package-lock.json": true
+  },
+  "git.confirmSync": false,
+  "emmet.showExpandedAbbreviation": "never",
+  "editor.suggest.showWords": false,
+  "emmet.triggerExpansionOnTab": true,
+  "editor.minimap.enabled": false,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "window.zoomLevel": 2,
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "tabnine.experimentalAutoImports": true,
+  "javascript.suggest.autoImports": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  }
+}
