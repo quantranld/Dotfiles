@@ -1,0 +1,4 @@
+Import-Module oh-my-posh
+# oh-my-posh --init --shell pwsh --config "~\oh-my-posh-themes\handsome.omp.json" | Invoke-Expression
+oh-my-posh --init --shell pwsh --config "~\oh-my-posh-themes\hunk.omp.json" | Invoke-Expression
+# oh-my-posh --init --shell pwsh --config "~\oh-my-posh-themes\blue-owl.omp.json" | Invoke-Expression
