@@ -10,13 +10,12 @@ an executable
 
 -- general
 lvim.log.level = "warn"
-lvim.format_on_save = true
-lvim.colorscheme = "onedarker"
+lvim.format_on_save = false
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
 -- add your own keymapping
-lvim.keys.normal_mode["<C-Q>"] = ":q!<cr>"
+-- lvim.keys.normal_mode["<C-Q>"] = ":q!<cr>"
 -- unmap a default keymapping
 -- lvim.keys.normal_mode["<C-Up>"] = false
 
@@ -40,29 +39,36 @@ lvim.builtin.telescope.defaults.mappings = {
 
 -- Use which-key to add extra bindings with the leader-key prefix
 -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
--- lvim.builtin.which_key.mappings["t"] = {
---   name = "+Trouble",
---   r = { "<cmd>Trouble lsp_references<cr>", "References" },
---   f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
---   d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diagnostics" },
---   q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
---   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
---   w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnostics" },
--- }
+lvim.builtin.which_key.mappings["t"] = {
+  name = "+Trouble",
+  r = { "<cmd>Trouble lsp_references<cr>", "References" },
+  f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
+  d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diagnostics" },
+  q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
+  l = { "<cmd>Trouble loclist<cr>", "LocationList" },
+  w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnostics" },
+  t = { "<cmd>TroubleToggle<cr>", "TroubleToggle" },
+}
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
-lvim.builtin.dashboard.active = true
+lvim.builtin.dashboard.active = false
+lvim.builtin.alpha.active = true
 lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
 -- lvim.builtin.terminal.shell = "/usr/bin/bash"
 lvim.builtin.nvimtree.setup.view.side = "right"
-lvim.builtin.nvimtree.setup.view.width = 60
+lvim.builtin.nvimtree.setup.view.width = 50
 lvim.builtin.nvimtree.show_icons.git = 1
-lvim.builtin.lualine.style = "default"
+lvim.builtin.lualine.style = "lvim"
+-- lvim.builtin.lualine.style = "full"
 
 vim.opt.foldmethod = "expr" -- folding set to "expr" for treesitter based folding
+vim.opt.foldlevelstart = 20
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()" -- set to "nvim_treesitter#foldexpr()" for treesitter based folding
+vim.opt.shiftwidth = 4 -- override with eti config
+vim.opt.tabstop = 4 -- override with eti config
+vim.opt.timeoutlen = 100 -- time to wait for a mapped sequence to complete (in milliseconds)
 
 -- override default settings
 vim.opt.relativenumber = true
@@ -70,7 +76,7 @@ vim.opt.relativenumber = true
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
   "bash",
-  "c",
+  -- "c",
   "javascript",
   "json",
   "lua",
@@ -125,8 +131,8 @@ formatters.setup {
     -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
     extra_args = { "--print-with", "100" },
     ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
-    -- filetypes = { "typescript", "typescriptreact", "javascriptreact", "javascript", "html" },
-    filetypes = { "html" },
+    filetypes = { "typescript", "typescriptreact", "javascriptreact", "javascript", "html" },
+    -- filetypes = { "html" },
   },
 }
 
@@ -150,18 +156,34 @@ formatters.setup {
 
 -- Additional Plugins
 lvim.plugins = {
-    {"folke/tokyonight.nvim"},
     {
       "folke/trouble.nvim",
       cmd = "TroubleToggle",
     },
     {"tpope/vim-surround"},
     {"ap/vim-css-color"},
+    -- theme
+    {"folke/tokyonight.nvim"},
     {"dracula/vim"},
-    {"sainnhe/gruvbox-material"}
+    {"sainnhe/gruvbox-material"},
+    {
+      "phaazon/hop.nvim", branch = 'v1', -- optional but strongly recommended
+      config = function()
+        -- you can configure Hop the way you like here; see :h hop-config
+        require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
+      end
+    },
+  {
+    "prettier/vim-prettier",
+    cmd = "yarn install --frozen-lockfile --production",
+  }
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
--- lvim.autocommands.custom_groups = {
---   { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
--- }
+lvim.autocommands.custom_groups = {
+  -- { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
+  { "BufEnter", "*.yml", "setlocal foldmethod=indent ai ts=4 sw=4 sts=4 et cuc nu" },
+  { "BufEnter", "*.yaml", "setlocal foldmethod=indent ai ts=4 sw=4 sts=4 et cuc nu" },
+  -- { "BufEnter", "*.tsx", "setlocal foldmethod=syntax" },
+}
+
