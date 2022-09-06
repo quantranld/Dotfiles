@@ -1,0 +1,21 @@
+set hlsearch
+set relativenumber
+
+inoremap kj <esc>
+"Whole viewport jump-to-word beginning mode:
+nnoremap <Space>hw :vsc Tools.InvokePeasyMotion<CR>
+nnoremap <Space>ht :vsc Tools.InvokePeasyMotionJumpToDocumentTab<CR>
+
+
+nnoremap gr :vsc Edit.FindAllReferences<cr>
+"nnoremap gD :vsc ReSharper.ReSharper_GotoTypeDeclaration<cr>
+"nnoremap gI :vsc ReSharper.ReSharper_GotoImplementation<cr>
+nnoremap gI :vsc Edit.GoToImplementation<cr>
+nnoremap K :vsc Edit.QuickInfo<cr>
+"nnoremap <C-k> :vsc ReSharper.ReSharper_InspectThis<cr>
+nnoremap gk :vsc Edit.PeekDefinition<cr>
+
+nnoremap <c-o> :vsc View.NavigateBackward<cr>
+nnoremap <c-i> :vsc View.NavigateForward<cr>
+xnoremap gc :vsc Edit.CommentSelection<cr>
+nnoremap gcc V:vsc Edit.CommentSelection<cr>
