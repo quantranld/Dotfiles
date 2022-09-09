@@ -1,10 +1,12 @@
 set hlsearch
 set relativenumber
+set clipboard=unnamed
 
 inoremap kj <esc>
 "Whole viewport jump-to-word beginning mode:
 nnoremap <Space>hw :vsc Tools.InvokePeasyMotion<CR>
 nnoremap <Space>ht :vsc Tools.InvokePeasyMotionJumpToDocumentTab<CR>
+nnoremap <Space>H :nohl<CR>
 
 
 nnoremap gr :vsc Edit.FindAllReferences<cr>
@@ -19,3 +21,40 @@ nnoremap <c-o> :vsc View.NavigateBackward<cr>
 nnoremap <c-i> :vsc View.NavigateForward<cr>
 xnoremap gc :vsc Edit.CommentSelection<cr>
 nnoremap gcc V:vsc Edit.CommentSelection<cr>
+
+nnoremap L :vsc Window.PreviousTab<CR>
+nnoremap H :vsc Window.NextTab<CR>
+" nnoremap <c-^> :vsc window.NextDocumentWindowNav<CR> "toggle most recent tab
+nnoremap <space>fm :vsc Edit.CollapsetoDefinitions<CR> "~ctrl mo
+nnoremap <space>fa :vsc Edit.ToggleAllOutlining<CR>
+" nnoremap <space>ft :vsc Edit.ToggleOutliningExpansion<CR> "~za
+" nnoremap gnd :vsc Window.NextDocumentWindow<CR>
+" nnoremap gpd :vsc Window.PreviousDocumentWindow<CR>
+
+nnoremap gwo :vsc FullScreen<cr>
+nnoremap <space>c :vsc Window.CloseDocumentWindow<cr>
+
+nnoremap gws :vsc Window.Split<cr>
+nnoremap gwv :vsc Window.Split<cr>
+nnoremap gwj :vsc Window.NextSplitPane<cr>
+nnoremap gwk :vsc Window.PreviousSplitPane<cr>
+nnoremap <space>pp :vsc Window.PinTab<cr>
+nnoremap <space>pc :vsc Window.CloseAllButPinned<cr>
+
+" tab group
+nnoremap gwgh :vsc Window.MovetoPreviousTabGroup<cr>
+nnoremap gwgl :vsc Window.MovetoNextTabGroup<cr>
+nnoremap gwS :vsc Window.NewHorizontalTabGroup<cr>
+nnoremap gwV :vsc Window.NewVerticalTabGroup<cr>
+nnoremap <c-h> :vsc Tools.NavigateTabGroups.Left<cr>
+nnoremap <c-l> :vsc Tools.NavigateTabGroups.Right<cr>
+nnoremap gwJ :vsc Tools.NavigateTabGroups.Down<cr>
+nnoremap gwK :vsc Tools.NavigateTabGroups.Up<cr>
+
+nnoremap <c-T> :vsc Window.RestoreClosedTab<cr>
+" nnoremap <c-Q> :vsc Window.Window.ToggleSplitView<cr>
+
+nmap <space>ac :vsc Project.AddClass<CR>
+
+
+"Window.SplitWindowHorizontally Window.SplitWindowVertically
