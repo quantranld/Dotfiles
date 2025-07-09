@@ -1,0 +1,126 @@
+# Import-Module oh-my-posh
+# oh-my-posh --init --shell pwsh --config "~\oh-my-posh-themes\hunk.omp.json" | Invoke-Expression
+oh-my-posh --init --shell pwsh --config "~\oh-my-posh-themes\cloud-native-azure.omp.json" | Invoke-Expression
+
+# Set-Alias lvim C:\Users\QuanTranHoang\.local\bin\lvim.ps1
+# Set-Alias lvim C:\Users\QuanTranHoang\AppData\Roaming\lunarvim\lvim\utils\bin\lvim.ps1
+
+Set-PSReadlineOption -EditMode Emacs
+
+Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
+Set-PSReadLineOption -PredictionSource History
+
+Set-Alias lvim 'C:\Users\Quan.Tran\.local\bin\lvim.ps1'
+
+
+function qt-killport {
+    param(
+        [int]$port
+    )
+    $_pid = (Get-NetTCPConnection -LocalPort $port -ErrorAction SilentlyContinue).OwningProcess
+    if ($_pid) {
+        Stop-Process -Id $_pid -Force
+        Write-Host "Killed process $_pid using port $port"
+    } else {
+        Write-Host "No process found using port $port"
+    }
+}
+
+$qtcd= @{
+    pnpapi = 'C:\projects\PracticeHub.PoliciesAndProcedures\src\PracticeHub.PnP.Api'
+    pnpweb = 'C:\projects\PracticeHub.PoliciesAndProcedures\src\PracticeHub.PnP.Web'
+    portalweb = 'C:\projects\PracticeHub\src\PracticeHub.Web.Mvc'
+    portalapi = 'C:\projects\PracticeHub\src\PracticeHub.Web.Api'
+    ahpraapi='C:\projects\AHPRA\src\Ahpra.App.Api'
+    ahpraweb='C:\projects\AHPRA\src\Ahpra.App.Web'
+    tasksweb='C:\projects\PracticeHub.TasksManagement\src\PracticeHub.TasksManagement.Web'
+    tasksapi='C:\projects\PracticeHub.TasksManagement\src\PracticeHub.Tasks.Api'
+}
+
+function BuildAndRunProject {
+    param(
+        [Parameter(Mandatory=$true)]
+        [string]$ProjectPath,
+
+        [Parameter(Mandatory=$false)]
+        [bool]$Watch = $false, # Default to $false (i.e., dotnet run)
+
+        [Parameter(Mandatory=$false)]
+        [bool]$Npm = $false   # New flag: Default to $false
+    )
+
+    # Use Push-Location to save current location and Pop-Location later
+    Push-Location $ProjectPath
+    try {
+        Clear-Host
+
+        # --- Npm/Yarn Logic (Higher Priority) ---
+        if ($Npm) {
+            $clientAppPath = Join-Path -Path $ProjectPath -ChildPath "clientapp"
+
+            if (-not (Test-Path $clientAppPath -PathType Container)) {
+                Write-Error "Client app directory not found at: $clientAppPath"
+                return # Early exit if client app path doesn't exist
+            }
+
+            Write-Host "Npm flag is true. Navigating to $clientAppPath for yarn commands."
+            Push-Location $clientAppPath
+            try {
+                Write-Host "Running yarn install --frozen-lockfile..."
+                yarn install --frozen-lockfile
+                if ($LASTEXITCODE -ne 0) {
+                    Write-Warning "yarn install failed. Aborting."
+                    return
+                }
+
+                Write-Host "Running yarn webpack..."
+                yarn webpack
+                if ($LASTEXITCODE -ne 0) {
+                    Write-Warning "yarn webpack failed. Aborting."
+                    return
+                }
+            }
+            finally {
+                Pop-Location # Return from clientapp directory
+            }
+
+            Write-Host "Npm/Yarn commands completed. Early exit."
+            return # Early exit the function after Npm/Yarn tasks
+        }
+
+        # --- Dotnet Build/Run Logic (Lower Priority, only if $Npm is false) ---
+        Write-Host "Building project at: $ProjectPath"
+        dotnet build
+
+        if ($LastExitCode -ne 0) {
+            Write-Warning "dotnet build failed. Aborting run."
+            return # Exit the function if build fails
+        }
+
+        if ($Watch) {
+            Write-Host "Running project with 'dotnet watch run'..."
+            dotnet watch run
+        } else {
+            Write-Host "Running project with 'dotnet run'..."
+            dotnet run
+        }
+    }
+    finally {
+        Pop-Location # Ensure we return to the original directory
+    }
+}
+
+# build and debug project name
+function debugqt {
+    param(
+        [ValidateSet("pnpapi", "pnpweb", "portalweb", "portalapi", "ahpraapi", "ahpraweb", "tasksweb", "tasksapi")]
+        [string]$name,
+
+        [Parameter(Mandatory=$false)]
+        [switch]$watch = $false, # Default to $false (i.e., dotnet run)
+
+        [Parameter(Mandatory=$false)]
+        [switch]$npm = $false   # New flag: Default to $false
+    )
+    BuildAndRunProject -ProjectPath $qtcd[$name] -Watch $watch -Npm $npm
+}
