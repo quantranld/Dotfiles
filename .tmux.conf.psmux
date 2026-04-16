@@ -1,0 +1,52 @@
+# --- GENERAL SETTINGS ---
+# This is windows so plugins - tpm won't work
+
+
+
+set -g mouse on               # Enable mouse clicking, resizing, and scrolling
+set -g base-index 1           # Start windows at 1 instead of 0
+setw -g pane-base-index 1     # Start panes at 1 instead of 0
+set -g renumber-windows on    # Automatically renumber windows when one is closed
+setw -g mode-keys vi # Use vi keys in copy mode and menus
+# Set the default shell to PowerShell 7
+set -g default-shell "C:\Users\QuanTranHoang\scoop\apps\pwsh\7.5.2\pwsh.exe"
+
+# Set new panes to open in current directory
+bind c new-window -c "#{pane_current_path}"
+
+# --- KEYBINDS ---
+# Remap prefix to Ctrl+a (easier to reach)
+# unbind C-b
+# set -g prefix C-a
+# bind C-a send-prefix
+
+# Split panes using | and - (more intuitive)
+unbind '"'
+unbind %
+bind | split-window -h -c "#{pane_current_path}"
+bind - split-window -v -c "#{pane_current_path}"
+
+# pane movement shortcuts (same as vim)
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
+
+# Initialize TPM (Keep this at the very bottom)
+set -g status on
+set -g @plugin 'psmux-plugins/ppm'
+run-shell 'C:\Users\QuanTranHoang\.tmux\plugins\ppm\ppm.ps1'
+set -g @plugin 'psmux-plugins/psmux-sensible'
+run-shell 'C:\Users\QuanTranHoang\.tmux\plugins\psmux-sensible\psmux-sensible.ps1'
+set -g @plugin 'psmux-plugins/psmux-prefix-highlight'
+run-shell 'C:\Users\QuanTranHoang\.tmux\plugins\psmux-prefix-highlight\psmux-prefix-highlight.ps1'
+set -g @plugin 'psmux-plugins/psmux-resurrect'
+run-shell 'C:\Users\QuanTranHoang\.tmux\plugins\psmux-resurrect\psmux-resurrect.ps1'
+set -g @plugin 'psmux-plugins/psmux-continuum'
+run-shell 'C:\Users\QuanTranHoang\.tmux\plugins\psmux-continuum\psmux-continuum.ps1'
+set -g @plugin 'psmux-plugins/psmux-git-status'
+run-shell 'C:\Users\QuanTranHoang\.tmux\plugins\psmux-git-status\psmux-git-status.ps1'
+# set -g @plugin 'psmux-plugins/psmux-theme-onedark'
+run-shell 'C:\Users\QuanTranHoang\.tmux\plugins\psmux-theme-onedark\psmux-theme-onedark.ps1'
+set -g @plugin 'psmux-plugins/psmux-theme-dracula'
+run-shell 'C:\Users\QuanTranHoang\.tmux\plugins\psmux-theme-dracula\psmux-theme-dracula.ps1'
